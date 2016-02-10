@@ -20,10 +20,13 @@ void send_answer(TEEC_Session sess,char *answer,uint32_t err_origin){
 	memset(&op, 0 , sizeof(op));
 	op.paramTypes = TEEC_PARAM_TYPES(TEEC_VALUE_OUTPUT,TEEC_MEMREF_TEMP_INPUT,TEEC_VALUE_OUTPUT,TEEC_NONE);
 	op.params[1].tmpref.buffer = answer;
-	op.params[1].tmpref.size = sizeof(char) * strlen(answer);
+	op.params[1].tmpref.size = strlen(answer);
 	res = TEEC_InvokeCommand(&sess, TA_QUIZ_CMD_CHECK_ANSWER, &op,&err_origin);
 	if (res != TEEC_SUCCESS)
-		errx(1, "TEEC_Send_Answer failed with code 0x%x origin 0x%x",res, err_origin);	
+		errx(1, "TEEC_Send_Answer failed with code 0x%x origin 0x%x",res, err_origin);
+	if(op.params[0].value.a == 1){
+		printf("\n----------------------- \nScore = %d %% \n-----------------------  \n",op.params[2].value.a );
+	}	
 
 }
 int main(void){
@@ -64,8 +67,8 @@ int main(void){
 		if(op.params[0].value.a == 0){
 			break;
 		}else{
-			printf("Question:\n %s \n",question );
-			printf("Enter your anwer:\n");
+			printf("\n----------------------- \n Question:\n %s \n",question );
+			printf(" Enter your anwer:\n");
 			char answer[DEF_QUES_SIZE];
 			fgets(answer,DEF_QUES_SIZE,stdin);
 			if ((strlen(answer)>0) && (answer[strlen (answer) - 1] == '\n'))

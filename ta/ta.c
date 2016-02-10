@@ -93,7 +93,18 @@ static TEE_Result check_answer(uint32_t param_types, TEE_Param params[4]){
 		return TEE_ERROR_BAD_PARAMETERS;
 	
 	answer_text = params[1].memref.buffer;
-	IMSG("Entered Answer is %s ",answer_text);
+	answer_text[params[1].memref.size] = '\0';
+	IMSG("Entered Answer is %s.",answer_text);
+	if(strcmp(answers[q_no-1],answer_text) == 0){
+		score++;
+	}
+	if(q_no == max_qs){
+		params[2].value.a = (score/(float)max_qs ) * 100;
+		params[0].value.a = 1;
+	}else{
+		params[0].value.a = 0;
+	}
+
 
 	return TEE_SUCCESS;
 }
@@ -112,6 +123,7 @@ static TEE_Result start_quiz(uint32_t param_types, TEE_Param params[4])
 	
 	if( q_no < max_qs){
 		char *plaintext = params[1].memref.buffer;
+
 		params[0].value.a = 1;
 		memcpy(plaintext,questions[q_no],sizeof(char) * DEF_QUES_SIZE);
 		
