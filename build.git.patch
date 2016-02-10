@@ -1,0 +1,13 @@
+diff --git a/qemu.mk b/qemu.mk
+index c030f31..ed3fd5e 100644
+--- a/qemu.mk
++++ b/qemu.mk
+@@ -169,6 +169,8 @@ filelist-tee: xtest
+ 	@echo "file /lib/optee_armtz/11111111-2222-3333-445566778899aabb.ta $(ROOT)/template_ta/ta/out/11111111-2222-3333-445566778899aabb.ta 444 0 0" >> $(GEN_ROOTFS_FILELIST)
+ 	@echo "file /bin/gp_socket_test $(ROOT)/gp_socket_ta/host/gp_socket_test 755 0 0" >> $(GEN_ROOTFS_FILELIST)
+ 	@echo "file /lib/optee_armtz/11111111-2222-3333-445566778899aabc.ta $(ROOT)/gp_socket_ta/ta/out/11111111-2222-3333-445566778899aabc.ta 444 0 0" >> $(GEN_ROOTFS_FILELIST)
++	@echo "file /bin/neo $(ROOT)/neo/host/neo 755 0 0" >> $(GEN_ROOTFS_FILELIST)
++	@echo "file /lib/optee_armtz/11111111-1111-1111-1111111111111111.ta $(ROOT)/neo/ta/out/11111111-1111-1111-1111111111111111.ta 444 0 0" >> $(GEN_ROOTFS_FILELIST)
+ 
+ update_rootfs: busybox optee-client optee-linuxdriver filelist-tee
+ 	cat $(GEN_ROOTFS_PATH)/filelist-final.txt $(GEN_ROOTFS_PATH)/filelist-tee.txt > $(GEN_ROOTFS_PATH)/filelist.tmp
