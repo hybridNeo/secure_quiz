@@ -11,6 +11,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+struct question{
+	char q[120],answer[30];
+};
+
 /*
  * Function to send answer to the TEE
  */
@@ -27,26 +31,50 @@ void send_answer(TEEC_Session sess,char *answer,uint32_t err_origin){
 	if(op.params[0].value.a == 1){
 		printf("\n----------------------- \nScore = %d %% \n-----------------------  \n",op.params[2].value.a );
 	}	
-
 }
+
+
+
+
 int main(void){
  	TEEC_Result res;
 	TEEC_Context ctx;
 	TEEC_Session sess;
-	TEEC_Operation op;
+	TEEC_Operation op,init_vals;
 	TEEC_UUID uuid = TA_QUIZ_UUID;
 	char question[DEF_QUES_SIZE] = {0};
 	uint32_t err_origin;
+	//strt file read
+	FILE *infile;
+	infile = fopen("/bin/test.txt","r");
+	int num = 0;			
+	struct question temp;
+	int i;
+	while(fread(&temp,sizeof(struct question),1,infile) != 0){
+		//printf("%s \n %s \n",temp.q,temp.answer);
+		num++;
+	}
+	fseek(infile,0,SEEK_SET);	
+	struct question ques[num];
+	for(i =0 ; i < num;++i){
+		fread(&ques[i],sizeof(struct question),1,infile);
+	}
+	//end of read from file
+	memset(&init_vals,0,sizeof(init_vals));
+	init_vals.paramTypes = TEEC_PARAM_TYPES(TEEC_VALUE_INPUT,TEEC_MEMREF_TEMP_INPUT,TEEC_NONE,TEEC_NONE);
+	init_vals.params[0].value.a = num;
+	init_vals.params[1].tmpref.buffer = ques;
+	init_vals.params[1].tmpref.size = sizeof(ques[0])*num;
+
 	res = TEEC_InitializeContext(NULL, &ctx); // This basically checks if a TEE is present in the system
 	if (res != TEEC_SUCCESS)
 		errx(1, "TEEC_InitializeContext failed with code 0x%x", res);   
 	/*
 	 * Open a session to the  TA
 	 */
-	res = TEEC_OpenSession(&ctx, &sess, &uuid,TEEC_LOGIN_PUBLIC, NULL, NULL, &err_origin);
+	res = TEEC_OpenSession(&ctx, &sess, &uuid,TEEC_LOGIN_PUBLIC, NULL, &init_vals, &err_origin);
 	if (res != TEEC_SUCCESS)
 		errx(1, "TEEC_Opensession failed with code 0x%x origin 0x%x",res, err_origin);
-
 
 	/*
 	 * Prepare the argument. Pass a value in the first parameter,
@@ -83,7 +111,6 @@ int main(void){
 	 * Close the session 
 	 */
 	TEEC_CloseSession(&sess);
-
 	TEEC_FinalizeContext(&ctx);
 
 

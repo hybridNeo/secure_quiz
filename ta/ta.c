@@ -6,6 +6,10 @@
 #include "ta_quiz.h"
 #include <string.h>
 #include <neolib.h>
+#include <stdio.h>
+struct question{
+	char q[120],answer[30];
+};
 
 
 /*
@@ -35,14 +39,18 @@ char answers[2][DEF_QUES_SIZE];
  * Called By the OpenSessionEntryPoint to initialize the variables
  * sets score to 0, q_no to 0 and fetches number of questions
  */
- static void set_params(void){
+static void set_params(struct question* ques, int max){
+ 	int i;
  	score = 0;
  	q_no = 0;
- 	max_qs = 2;
- 	string_copy(questions[0],"Who is the first Indian to go to space ?");
- 	string_copy(questions[1],"Which is the only mammal to have wings?");
- 	string_copy(answers[0],"Rakesh Sharma");
- 	string_copy(answers[1],"Bat");
+ 	max_qs = max;
+ 	for(i=0;i < max_qs;++i){
+ 		string_copy(questions[i],(*(ques+i)).q);
+ 		string_copy(answers[i],(*(ques+i)).answer);
+ 	}
+ 	// string_copy(questions[1],"Which is the only mammal to have wings?");
+ 	// string_copy(answers[0],"Rakesh Sharma");
+ 	// string_copy(answers[1],"Bat");
  }
 
 /*
@@ -52,18 +60,20 @@ char answers[2][DEF_QUES_SIZE];
  */
 TEE_Result TA_OpenSessionEntryPoint(uint32_t param_types,
 		TEE_Param  params[4], void **sess_ctx)
-{
-	uint32_t exp_param_types = TEE_PARAM_TYPES(TEE_PARAM_TYPE_NONE,
-						   TEE_PARAM_TYPE_NONE,
+{	struct question *ques;
+	uint32_t exp_param_types = TEE_PARAM_TYPES(TEE_PARAM_TYPE_VALUE_INPUT,
+						   TEE_PARAM_TYPE_MEMREF_INPUT,
 						   TEE_PARAM_TYPE_NONE,
 						   TEE_PARAM_TYPE_NONE);
 	if (param_types != exp_param_types)
 		return TEE_ERROR_BAD_PARAMETERS;
 
 	/* Unused parameters */
-	(void)&params;
 	(void)&sess_ctx;
-	set_params(); 
+
+	ques = params[1].memref.buffer;
+	IMSG("%d %s \n ",params[0].value.a,(*(ques+1)).q);
+	set_params(ques,params[0].value.a); 
 	/*
 	 * The IMSG() macro is non-standard, TEE Internal API doesn't
 	 * specify any means to logging from a TA.
@@ -99,7 +109,7 @@ static TEE_Result check_answer(uint32_t param_types, TEE_Param params[4]){
 		score++;
 	}
 	if(q_no == max_qs){
-		params[2].value.a = (score/(float)max_qs ) * 100;
+		params[2].value.a = ((float)score/(float)max_qs ) * 100;
 		params[0].value.a = 1;
 	}else{
 		params[0].value.a = 0;
@@ -120,7 +130,6 @@ static TEE_Result start_quiz(uint32_t param_types, TEE_Param params[4])
 						   TEE_PARAM_TYPE_NONE);
 	if (param_types != exp_param_types)
 		return TEE_ERROR_BAD_PARAMETERS;
-	
 	if( q_no < max_qs){
 		char *plaintext = params[1].memref.buffer;
 
