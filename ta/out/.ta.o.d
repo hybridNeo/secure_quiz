@@ -15,4 +15,10 @@
  include/ta_quiz.h \
  /home/rahulmahadev/devel/optee/optee_os/out/arm-plat-vexpress/export-ta_arm32/include/string.h \
  /home/rahulmahadev/devel/optee/optee_os/out/arm-plat-vexpress/export-ta_arm32/include/sys/cdefs.h \
- neolib.h
+ neolib.h \
+ /home/rahulmahadev/devel/optee/optee_os/out/arm-plat-vexpress/export-ta_arm32/include/stdlib.h \
+ /home/rahulmahadev/devel/optee/optee_os/out/arm-plat-vexpress/export-ta_arm32/include/malloc.h \
+ /home/rahulmahadev/devel/optee/optee_os/out/arm-plat-vexpress/export-ta_arm32/include/types_ext.h \
+ /home/rahulmahadev/devel/optee/optee_os/out/arm-plat-vexpress/export-ta_arm32/include/limits.h \
+ /home/rahulmahadev/devel/optee/optee_os/out/arm-plat-vexpress/export-ta_arm32/include/inttypes.h \
+ /home/rahulmahadev/devel/optee/optee_os/out/arm-plat-vexpress/export-ta_arm32/include/unistd.h

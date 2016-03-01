@@ -7,6 +7,7 @@
 #include <string.h>
 #include <neolib.h>
 #include <stdio.h>
+#include <stdlib.h>
 struct question{
 	char q[120],answer[30];
 };
@@ -33,7 +34,7 @@ void TA_DestroyEntryPoint(void)
 int score;
 int q_no;
 int max_qs;
-char questions[2][DEF_QUES_SIZE];
+char (*questions)[DEF_QUES_SIZE];
 char answers[2][DEF_QUES_SIZE];
 /*
  * Called By the OpenSessionEntryPoint to initialize the variables
@@ -44,6 +45,7 @@ static void set_params(struct question* ques, int max){
  	score = 0;
  	q_no = 0;
  	max_qs = max;
+ 	questions = malloc(max_qs * DEF_QUES_SIZE * sizeof(char ));
  	for(i=0;i < max_qs;++i){
  		string_copy(questions[i],(*(ques+i)).q);
  		string_copy(answers[i],(*(ques+i)).answer);
