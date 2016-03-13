@@ -11,7 +11,7 @@
 /* The Trusted Application Function ID(s) implemented by this TA */
 
 #define DEF_QUES_SIZE 120
-#define DEF_ANS_SIZE 30
+#define DEF_ANS_SIZE 40
 #define TA_QUIZ_CMD_START_QUIZ 0
 #define TA_QUIZ_CMD_CHECK_ANSWER 1
 

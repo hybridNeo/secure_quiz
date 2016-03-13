@@ -7,6 +7,7 @@
  /home/rahulmahadev/devel/optee/toolchains/aarch32/lib/gcc/arm-linux-gnueabihf/4.9.2/include/stdbool.h \
  /home/rahulmahadev/devel/optee/toolchains/aarch32/lib/gcc/arm-linux-gnueabihf/4.9.2/include/stddef.h \
  /home/rahulmahadev/devel/optee/optee_os/out/arm-plat-vexpress/export-ta_arm32/include/tee_api.h \
+ /home/rahulmahadev/devel/optee/optee_os/out/arm-plat-vexpress/export-ta_arm32/include/tee_internal_api.h \
  /home/rahulmahadev/devel/optee/optee_os/out/arm-plat-vexpress/export-ta_arm32/include/tee_internal_api_extensions.h \
  /home/rahulmahadev/devel/optee/optee_os/out/arm-plat-vexpress/export-ta_arm32/include/trace.h \
  /home/rahulmahadev/devel/optee/optee_os/out/arm-plat-vexpress/export-ta_arm32/include/trace_levels.h \

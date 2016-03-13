@@ -13,9 +13,9 @@ int main(void){
 	struct question q1,q2;
 	//char ques1[120],ans1[40],ques2[120],ans2[40];
 	strcpy(q1.q,"Which is the first operating system");
-	strcpy(q1.answer, "d13bbbd92b83ddaad994a12bd9d20dfba5fff139");
-	strcpy(q2.q, " Who invented Java?");
-	strcpy(q2.answer,"fdfd3f392068162d338a12418018ccc6886a5883");
+	strcpy(q2.q,"Who invented Java");
+	q1.answer = "d13bbbd92b83ddaad994a12bd9d20dfba5fff139";
+	q2.answer = "fdfd3f392068162d338a12418018ccc6886a5883";
 	fwrite(&q1,sizeof(struct question),1,outfile);	
 	fwrite(&q2,sizeof(struct question),1,outfile);	
 	

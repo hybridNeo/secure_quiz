@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 struct question{
-	char q[120],answer[30];
+	char q[120],answer[40];
 };
 int main(void){
 	FILE *infile;

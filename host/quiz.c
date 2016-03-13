@@ -12,7 +12,7 @@
 #include <string.h>
 
 struct question{
-	char q[120],answer[30];
+	char q[120],answer[40];
 };
 
 /*
@@ -51,7 +51,7 @@ int main(void){
 	struct question temp;
 	int i;
 	while(fread(&temp,sizeof(struct question),1,infile) != 0){
-		//printf("%s \n %s \n",temp.q,temp.answer);
+		// printf("%s \n %s \n",temp.q,temp.answer);
 		num++;
 	}
 	fseek(infile,0,SEEK_SET);	
