@@ -24,8 +24,7 @@ HOST_CROSS_COMPILE=/home/rahulmahadev/hikey_optee/toolchains/gcc-linaro-aarch64-
 # Build the host application
 
 #make CROSS_COMPILE=$HOST_CROSS_COMPILE $@
-cd $CURDIR/../
-make build-neo
+
 # Toolchain prefix for the Trusted Applications
 TA_CROSS_COMPILE=/home/rahulmahadev/hikey_optee/toolchains/gcc-linaro-aarch64-linux-gnu-4.9-2014.09_linux/bin/aarch64-linux-gnu-
 # Build the Trusted Application

@@ -46,7 +46,7 @@ int main(void){
 	uint32_t err_origin;
 	//strt file read
 	FILE *infile;
-	infile = fopen("/system/bin/test.txt","r");
+	infile = fopen("/bin/test.txt","r");
 	int num = 0;			
 	struct question temp;
 	int i;

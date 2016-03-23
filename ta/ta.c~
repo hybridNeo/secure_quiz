@@ -69,7 +69,7 @@ static int call_gp_sha1_interface(char *str, int len,char *key)
 	uint8_t d[20];
 	/* Temporary variables for the digest */
 	void *digest = NULL;
-	uint32_t digest_len = 0;
+	size_t digest_len = 0;
 
 	DMSG("Calling GP Internal API for doing SHA1 hashing");
 	message = str;

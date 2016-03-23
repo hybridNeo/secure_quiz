@@ -10,7 +10,7 @@ include $(TA_DEV_KIT_DIR)/host_include/conf.mk
 # By default we expect optee_client exported folder to be on a certain relative
 # path, but if the client specifies the OPTEE_CLIENT_EXPORT then that path will
 # be used instead.
-OPTEE_CLIENT_EXPORT ?= ./
+OPTEE_CLIENT_EXPORT ?= ../out/export
 
 CC		?= $(CROSS_COMPILE)gcc
 CPP		?= $(CROSS_COMPILE)cpp
