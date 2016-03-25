@@ -26,7 +26,32 @@ obj/local/arm64-v8a/objs/neo/host/quiz.o: host/quiz.c \
  /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/stdlib.h \
  /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/alloca.h \
  /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/strings.h \
- /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/memory.h
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/memory.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/unistd.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/sys/select.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/sys/time.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/linux/time.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/signal.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/errno.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/linux/errno.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/asm/errno.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/asm-generic/errno.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/asm-generic/errno-base.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/limits.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/sys/limits.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/linux/limits.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/sys/syslimits.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/asm/sigcontext.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/linux/signal.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/asm/signal.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/asm-generic/signal.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/asm-generic/signal-defs.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/asm/siginfo.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/asm-generic/siginfo.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/sys/ucontext.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/sys/user.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/sys/sysconf.h \
+ /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/pathconf.h
 
 /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/stdio.h:
 
@@ -85,3 +110,53 @@ ta/include/ta_quiz.h:
 /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/strings.h:
 
 /home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/memory.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/unistd.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/sys/select.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/sys/time.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/linux/time.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/signal.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/errno.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/linux/errno.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/asm/errno.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/asm-generic/errno.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/asm-generic/errno-base.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/limits.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/sys/limits.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/linux/limits.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/sys/syslimits.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/asm/sigcontext.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/linux/signal.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/asm/signal.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/asm-generic/signal.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/asm-generic/signal-defs.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/asm/siginfo.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/asm-generic/siginfo.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/sys/ucontext.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/sys/user.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/sys/sysconf.h:
+
+/home/rahulmahadev/hikey_optee/toolchains/android-ndk-r10e/platforms/android-21/arch-arm64/usr/include/pathconf.h:

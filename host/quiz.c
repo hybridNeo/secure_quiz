@@ -10,6 +10,7 @@
 #include <err.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 struct question{
 	char q[120],answer[40];
@@ -86,7 +87,61 @@ int main(void){
 					 TEEC_NONE, TEEC_NONE);
 	op.params[1].tmpref.buffer = question;
 	op.params[1].tmpref.size  = sizeof(question);
+	printf("Hello\n");
 	
+	while(1){
+
+		FILE *infile,*outfile;
+		infile = fopen("/data/data/com.example.rahulmahadev.myapplication/files/appout","r");
+		outfile = fopen("/data/data/com.example.rahulmahadev.myapplication/files/appin","r");
+		if(infile && outfile){
+
+			char mode;
+			fread(&mode,sizeof(char),1,infile);
+			fclose(infile);
+			fclose(outfile);
+			if(mode == '1'){
+				//fetch question
+				res = TEEC_InvokeCommand(&sess, TA_QUIZ_CMD_START_QUIZ, &op,&err_origin);
+				if (res != TEEC_SUCCESS)
+					errx(1, "TEEC_Get_Question failed with code 0x%x origin 0x%x",res, err_origin);	
+				if(op.params[0].value.a == 0){
+					break;
+				}else{
+					printf("\n *[Question]: %s \n",question );
+					infile = fopen("/data/data/com.example.rahulmahadev.myapplication/files/appout","w");
+					fputs("0",infile );
+					outfile = fopen("/data/data/com.example.rahulmahadev.myapplication/files/appin","w");
+					fputs(question,outfile );
+					fflush(infile);
+					fflush(outfile);
+					fclose(infile);
+					fclose(outfile);
+					// printf("[Expecting answer] \n");
+					// char answer[DEF_QUES_SIZE];
+					// fgets(answer,DEF_QUES_SIZE,stdin);
+					// if ((strlen(answer)>0) && (answer[strlen (answer) - 1] == '\n'))
+		        		// answer[strlen (answer) - 1] = '\0';
+		        	// send_answer(sess,answer,err_origin);
+
+					}
+				}else if(mode == '2'){
+					printf("Expecting answer\n");
+				}else if(mode == '0'){
+					printf("Waiting for device\n");
+				}
+				else{
+					printf("Waiting !!!\n");
+				}
+								
+		}else{
+			printf("Access denied\n");
+		}
+
+		sleep(1);
+	}
+	
+	/*
 	printf("********************** QUIZ **************************\n");
 	while(1){
 		res = TEEC_InvokeCommand(&sess, TA_QUIZ_CMD_START_QUIZ, &op,&err_origin);
@@ -106,6 +161,10 @@ int main(void){
 		}
 		
 	}	
+
+	*/
+
+
 	printf("Quiz ended\n");
 	/* 
 	 * Close the session 

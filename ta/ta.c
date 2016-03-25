@@ -9,7 +9,7 @@
 #include <neolib.h>
 #include <stdio.h>
 #include <stdlib.h>
-#define MAXTIME 10
+#define MAXTIME 60
 struct question{
 	char q[120],answer[40];
 };
