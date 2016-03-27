@@ -19,7 +19,7 @@ struct question{
 /*
  * Function to send answer to the TEE
  */
-void send_answer(TEEC_Session sess,char *answer,uint32_t err_origin){
+int send_answer(TEEC_Session sess,char *answer,uint32_t err_origin){
 	TEEC_Operation op;
 	TEEC_Result res;
 	memset(&op, 0 , sizeof(op));
@@ -27,11 +27,15 @@ void send_answer(TEEC_Session sess,char *answer,uint32_t err_origin){
 	op.params[1].tmpref.buffer = answer;
 	op.params[1].tmpref.size = strlen(answer);
 	res = TEEC_InvokeCommand(&sess, TA_QUIZ_CMD_CHECK_ANSWER, &op,&err_origin);
-	if (res != TEEC_SUCCESS)
+	if (res != TEEC_SUCCESS){
 		errx(1, "TEEC_Send_Answer failed with code 0x%x origin 0x%x",res, err_origin);
+		return -2;
+	}
 	if(op.params[0].value.a == 1){
 		printf("\n----------------------- \nScore = %d %% \n-----------------------  \n",op.params[2].value.a );
+		return op.params[2].value.a;
 	}	
+	return -1;
 }
 
 
@@ -127,6 +131,25 @@ int main(void){
 					}
 				}else if(mode == '2'){
 					printf("Expecting answer\n");
+					char answer[40];
+					infile = fopen("/data/data/com.example.rahulmahadev.myapplication/files/appout","r");
+					outfile = fopen("/data/data/com.example.rahulmahadev.myapplication/files/appin","w");
+					fseek(infile,2,SEEK_SET);
+					fread(answer,sizeof(char),40,infile);
+					printf("Entered answer is %s \n",answer );
+					int ans_res = send_answer(sess,answer,err_origin);
+					if(ans_res == -1){
+						fputs("3\n",outfile);
+					}else if(ans_res == -2){
+						printf("Error\n");
+					}else{
+						fputs("4",outfile);
+						break;
+					}
+					fflush(infile);
+					fflush(outfile);
+					fclose(infile);
+					fclose(outfile);
 				}else if(mode == '0'){
 					printf("Waiting for device\n");
 				}
