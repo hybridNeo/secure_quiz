@@ -16,6 +16,17 @@ struct question{
 	char q[120],answer[40];
 };
 
+
+
+void dbg(char *inp){
+	FILE *debug;
+	debug = fopen("/data/data/com.example.rahulmahadev.myapplication/files/debug","a");
+	fprintf(debug, "%s\n",inp );
+	fflush(debug);
+	fclose(debug);
+					
+}
+
 /*
  * Function to send answer to the TEE
  */
@@ -26,19 +37,20 @@ int send_answer(TEEC_Session sess,char *answer,uint32_t err_origin){
 	op.paramTypes = TEEC_PARAM_TYPES(TEEC_VALUE_OUTPUT,TEEC_MEMREF_TEMP_INPUT,TEEC_VALUE_OUTPUT,TEEC_NONE);
 	op.params[1].tmpref.buffer = answer;
 	op.params[1].tmpref.size = strlen(answer);
+	dbg("bk1");
 	res = TEEC_InvokeCommand(&sess, TA_QUIZ_CMD_CHECK_ANSWER, &op,&err_origin);
+	dbg("bk1.5");
 	if (res != TEEC_SUCCESS){
 		errx(1, "TEEC_Send_Answer failed with code 0x%x origin 0x%x",res, err_origin);
 		return -2;
 	}
 	if(op.params[0].value.a == 1){
+		dbg("bk2");
 		printf("\n----------------------- \nScore = %d %% \n-----------------------  \n",op.params[2].value.a );
 		return op.params[2].value.a;
 	}	
 	return -1;
 }
-
-
 
 
 int main(void){
@@ -94,8 +106,8 @@ int main(void){
 	printf("Hello\n");
 	
 	while(1){
-
-		FILE *infile,*outfile;
+		// dbg("start");
+		FILE *infile,*outfile,*debug;
 		infile = fopen("/data/data/com.example.rahulmahadev.myapplication/files/appout","r");
 		outfile = fopen("/data/data/com.example.rahulmahadev.myapplication/files/appin","r");
 		if(infile && outfile){
@@ -131,21 +143,42 @@ int main(void){
 					}
 				}else if(mode == '2'){
 					printf("Expecting answer\n");
-					char answer[40];
+					char answer[40]="unix";
 					infile = fopen("/data/data/com.example.rahulmahadev.myapplication/files/appout","r");
 					outfile = fopen("/data/data/com.example.rahulmahadev.myapplication/files/appin","w");
-					fseek(infile,2,SEEK_SET);
-					fread(answer,sizeof(char),40,infile);
+					// fseek(infile,2,SEEK_SET);
+					// fread(answer,sizeof(char),40,infile);
 					printf("Entered answer is %s \n",answer );
+					//start dbg
+					/*
+					*/
+					dbg("hi begin");
+					//end dbg
 					int ans_res = send_answer(sess,answer,err_origin);
+					dbg("hi end");
+
 					if(ans_res == -1){
-						fputs("3\n",outfile);
+						dbg("still remaining");
+						fputs("3",outfile);
 					}else if(ans_res == -2){
-						printf("Error\n");
+						dbg("error");
+						fputs("Error",outfile);
 					}else{
-						fputs("4",outfile);
-						break;
+						// char str[45];
+						// sprintf(str,"4\n%d",ans_res);
+						dbg("else seg");
+						fputs("4\n6",outfile);
+						fclose(infile);
+						fflush(outfile);
+						fflush(infile);
+						fclose(infile);
+						fclose(outfile);
+						goto exit;
 					}
+					fclose(infile);
+					infile = fopen("/data/data/com.example.rahulmahadev.myapplication/files/appout","w");
+					fputs("0",infile);
+
 					fflush(infile);
 					fflush(outfile);
 					fclose(infile);
@@ -162,6 +195,8 @@ int main(void){
 		}
 
 		sleep(1);
+		
+
 	}
 	
 	/*
@@ -187,14 +222,16 @@ int main(void){
 
 	*/
 
-
+	exit:
 	printf("Quiz ended\n");
+	// remove("/data/data/com.example.rahulmahadev.myapplication/files/appout");
+	// remove("/data/data/com.example.rahulmahadev.myapplication/files/appin")
 	/* 
 	 * Close the session 
 	 */
 	TEEC_CloseSession(&sess);
 	TEEC_FinalizeContext(&ctx);
-
+	dbg("end");
 
  	return 0;
 }
