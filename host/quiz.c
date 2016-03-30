@@ -143,20 +143,23 @@ int main(void){
 					}
 				}else if(mode == '2'){
 					printf("Expecting answer\n");
-					char answer[40]="unix";
+					char answer[DEF_QUES_SIZE];
 					infile = fopen("/data/data/com.example.rahulmahadev.myapplication/files/appout","r");
 					outfile = fopen("/data/data/com.example.rahulmahadev.myapplication/files/appin","w");
-					// fseek(infile,2,SEEK_SET);
-					// fread(answer,sizeof(char),40,infile);
+					fseek(infile,2,SEEK_SET);
+					fgets(answer,DEF_QUES_SIZE,infile);
 					printf("Entered answer is %s \n",answer );
 					//start dbg
 					/*
 					*/
-					dbg("hi begin");
+					dbg("hi begin\n answer is \n");
+					dbg(answer);
+					if ((strlen(answer)>0) && (answer[strlen (answer) - 1] == '\n'))
+		        		answer[strlen (answer) - 1] = '\0';
 					//end dbg
 					int ans_res = send_answer(sess,answer,err_origin);
 					dbg("hi end");
-
+					dbg(answer);
 					if(ans_res == -1){
 						dbg("still remaining");
 						fputs("3",outfile);
@@ -164,10 +167,10 @@ int main(void){
 						dbg("error");
 						fputs("Error",outfile);
 					}else{
-						// char str[45];
-						// sprintf(str,"4\n%d",ans_res);
+						char str[45];
+						sprintf(str,"4;%d",ans_res);
 						dbg("else seg");
-						fputs("4\n6",outfile);
+						fputs(str,outfile);
 						fclose(infile);
 						fflush(outfile);
 						fflush(infile);
