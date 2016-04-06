@@ -47,6 +47,40 @@ int main(void){
 	//strt file read
 	FILE *infile;
 	infile = fopen("/bin/test.txt","r");
+	int num = 0;
+	int i;			
+	ssize_t read;
+	size_t len =0;
+	char *line;
+	line = (char *)malloc(sizeof(char) * 120);
+	while((read = getline(&line,&len,infile)) != -1){
+		// printf("%s\n",line );
+		num++;
+	}
+	printf("%d\n",num);
+	struct question ques[num/2];
+
+	fseek(infile,0,SEEK_SET);
+	for(i =0 ; i < num;++i){
+		read = getline(&line,&len,infile);
+		// printf("%s\n",line );
+		line[strlen(line)] = '\0';
+			
+		if(i%2 == 0){
+			strcpy(ques[i/2].q,line);
+
+		}else{
+			strcpy(ques[i/2].answer,line);
+			
+
+		}
+	}
+	free(line);
+
+	num = num/2;
+	/*
+	FILE *infile;
+	infile = fopen("/bin/test.txt","r");
 	int num = 0;			
 	struct question temp;
 	int i;
@@ -59,6 +93,7 @@ int main(void){
 	for(i =0 ; i < num;++i){
 		fread(&ques[i],sizeof(struct question),1,infile);
 	}
+	*/
 	//end of read from file
 	memset(&init_vals,0,sizeof(init_vals));
 	init_vals.paramTypes = TEEC_PARAM_TYPES(TEEC_VALUE_INPUT,TEEC_MEMREF_TEMP_INPUT,TEEC_NONE,TEEC_NONE);

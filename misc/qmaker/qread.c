@@ -6,7 +6,7 @@ struct question{
 int main(void){
 	FILE *infile;
 	struct question input;
-	infile = fopen("ques.data","r");
+	infile = fopen("ques","r");
 	int num = 0;			
 	struct question temp;
 	while(fread(&temp,sizeof(struct question),1,infile) != 0){
