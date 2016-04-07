@@ -36,8 +36,8 @@
 #define TA_UUID TA_QUIZ_UUID
 
 #define TA_FLAGS                    (TA_FLAG_MULTI_SESSION | TA_FLAG_EXEC_DDR)
-#define TA_STACK_SIZE               (2 * 1024)
-#define TA_DATA_SIZE                (32 * 1024)
+#define TA_STACK_SIZE               (12 * 1024)
+#define TA_DATA_SIZE                (64 * 1024)
 
 #define TA_CURRENT_TA_EXT_PROPERTIES \
     { TA_PROP_STR_DESCRIPTION, USER_TA_PROP_TYPE_STRING, \

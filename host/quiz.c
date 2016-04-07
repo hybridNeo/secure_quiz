@@ -54,7 +54,7 @@ int main(void){
 	char *line;
 	line = (char *)malloc(sizeof(char) * 120);
 	while((read = getline(&line,&len,infile)) != -1){
-		// printf("%s\n",line );
+		 // printf("%s\n",line );
 		num++;
 	}
 	printf("%d\n",num);

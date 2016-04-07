@@ -9,7 +9,7 @@
 #include <neolib.h>
 #include <stdio.h>
 #include <stdlib.h>
-#define MAXTIME 10
+#define MAXTIME 100
 struct question{
 	char q[120],answer[40];
 };
@@ -141,7 +141,9 @@ int q_no;
 uint32_t start_time;
 int max_qs;
 char (*questions)[DEF_QUES_SIZE];
-char answers[2][DEF_QUES_SIZE];
+
+
+char (*answers)[DEF_QUES_SIZE];
 /*
  * Called By the OpenSessionEntryPoint to initialize the variables
  * sets score to 0, q_no to 0 and fetches number of questions
@@ -151,11 +153,23 @@ static void set_params(struct question* ques, int max){
  	score = 0;
  	q_no = 0;
  	max_qs = max;
-
+ 	DMSG("breakpoint alpha");
  	questions = malloc(max_qs * DEF_QUES_SIZE * sizeof(char ));
+ 	answers += (max_qs * DEF_QUES_SIZE *sizeof(char ));
+ 	answers = malloc(max_qs * DEF_QUES_SIZE * sizeof(char ));
+
  	for(i=0;i < max_qs;++i){
  		string_copy(questions[i],(*(ques+i)).q);
  		string_copy(answers[i],(*(ques+i)).answer);
+ 	}
+ 	for ( i = 0; i < max_qs; ++i)
+ 	{
+ 		DMSG("%s\n",answers[i]);
+ 	}
+ 	// string_copy(questions[0],(*(ques)).q);
+ 	for ( i = 0; i < max_qs; ++i)
+ 	{
+ 		DMSG("\n%s\n",answers[i]);
  	}
  	// string_copy(questions[1],"Which is the only mammal to have wings?");
  	// string_copy(answers[0],"Rakesh Sharma");
@@ -225,6 +239,8 @@ static TEE_Result check_answer(uint32_t param_types, TEE_Param params[4]){
 	answer_text = params[1].memref.buffer;
 	answer_text[params[1].memref.size] = '\0';
 	IMSG("Entered Answer is %s.",answer_text);
+	IMSG("DB Answer is %s.",answers[q_no-1]);
+	
 	if(call_gp_sha1_interface(answer_text,strlen(answer_text),answers[q_no-1]) == 1){
 
 		score++;
@@ -269,7 +285,7 @@ static TEE_Result start_quiz(uint32_t param_types, TEE_Param params[4])
 
 		params[0].value.a = 1;
 		memcpy(plaintext,questions[q_no],sizeof(char) * DEF_QUES_SIZE);
-		
+		DMSG("plain: %s \nafter:%s \n\n",plaintext,questions[q_no]);
 	}else{
 		params[0].value.a = 0;
 	}

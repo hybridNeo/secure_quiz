@@ -1,4 +1,12 @@
-Which is the first operating system?
-d13bbbd92b83ddaad994a12bd9d20dfba5fff139
-Which is the first operating system?
+______ is approximately one billion bytes.
+4bd2a6553aef16a1dbec4fad84fa00aae20c0f37
+The _____ keeps track of the memory address of the instruction that is to be executed next.
+b00027391d32d2254989b8ab80ed213508260727
+The _____ uniquely identifies a record in a database table.
+422cc336d1b540d9369e1e0f5cab98690fb83446
+GIF stands for ______
+c661d0a73822de8ef3ebea009d40da7eb86312dc
+_____ is the mechanism that bounds data and functions together within an object definition.
+33370ce0770375da0eb6862d051a3179b944ab90
+Which is the first operating system created?
 d13bbbd92b83ddaad994a12bd9d20dfba5fff139
