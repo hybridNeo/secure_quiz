@@ -141,7 +141,7 @@ int q_no;
 uint32_t start_time;
 int max_qs;
 char (*questions)[DEF_QUES_SIZE];
-char answers[2][DEF_QUES_SIZE];
+char (*answers)[DEF_QUES_SIZE];
 /*
  * Called By the OpenSessionEntryPoint to initialize the variables
  * sets score to 0, q_no to 0 and fetches number of questions
@@ -153,6 +153,9 @@ static void set_params(struct question* ques, int max){
  	max_qs = max;
 
  	questions = malloc(max_qs * DEF_QUES_SIZE * sizeof(char ));
+ 	answers += (max_qs * DEF_QUES_SIZE *sizeof(char ));
+ 	answers = malloc(max_qs * DEF_QUES_SIZE * sizeof(char ));
+
  	for(i=0;i < max_qs;++i){
  		string_copy(questions[i],(*(ques+i)).q);
  		string_copy(answers[i],(*(ques+i)).answer);

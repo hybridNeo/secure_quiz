@@ -54,6 +54,15 @@ int send_answer(TEEC_Session sess,char *answer,uint32_t err_origin){
 
 
 int main(void){
+	start:
+	dbg("pgm start");
+	FILE* check = fopen("/data/data/com.example.rahulmahadev.myapplication/files/appout","r");
+	while(check == NULL){
+		printf("Waiting for app to start\n");
+		FILE* check = fopen("/data/data/com.example.rahulmahadev.myapplication/files/appout","r");
+		sleep(1);
+	}
+	fclose(check);
  	TEEC_Result res;
 	TEEC_Context ctx;
 	TEEC_Session sess;
@@ -63,6 +72,44 @@ int main(void){
 	uint32_t err_origin;
 	//strt file read
 	FILE *infile;
+	infile = fopen("/system/bin/test.txt","r");
+	int num = 0;
+	int i;			
+	ssize_t read;
+	size_t len =0;
+	char *line;
+	line = (char *)malloc(sizeof(char) * 120);
+	while((read = getline(&line,&len,infile)) != -1){
+		 // printf("%s\n",line );
+		num++;
+	}
+	printf("%d\n",num);
+	struct question ques[num/2];
+
+	fseek(infile,0,SEEK_SET);
+	for(i =0 ; i < num;++i){
+		read = getline(&line,&len,infile);
+		// printf("%s\n",line );
+		line[strlen(line)] = '\0';
+			
+		if(i%2 == 0){
+			strcpy(ques[i/2].q,line);
+
+		}else{
+			strcpy(ques[i/2].answer,line);
+			
+
+		}
+	}
+	free(line);
+
+	num = num/2;
+	for (i = 0; i < num; ++i)
+	{
+		printf(" %s\n%s   \n\n",ques[i].q,ques[i].answer );
+	}
+
+	/*FILE *infile;
 	infile = fopen("/system/bin/test.txt","r");
 	int num = 0;			
 	struct question temp;
@@ -76,6 +123,7 @@ int main(void){
 	for(i =0 ; i < num;++i){
 		fread(&ques[i],sizeof(struct question),1,infile);
 	}
+	*/
 	//end of read from file
 	memset(&init_vals,0,sizeof(init_vals));
 	init_vals.paramTypes = TEEC_PARAM_TYPES(TEEC_VALUE_INPUT,TEEC_MEMREF_TEMP_INPUT,TEEC_NONE,TEEC_NONE);
@@ -235,6 +283,11 @@ int main(void){
 	TEEC_CloseSession(&sess);
 	TEEC_FinalizeContext(&ctx);
 	dbg("end");
-
+	while((fopen("/data/data/com.example.rahulmahadev.myapplication/files/appout","r")) != NULL){
+		dbg("Waiting for file to be deleted\n");
+		sleep(1);
+	}
+	fclose(check);
+	goto start;
  	return 0;
 }
